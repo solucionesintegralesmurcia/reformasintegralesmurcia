@@ -72,7 +72,7 @@ footer{background:var(--steel);color:#fff;padding:3.5rem 2rem 1.5rem;border-top:
     <li><a href="contacto.html">Contacto</a></li>
     <li><a href="tel:+34639311161" class="nav-phone-btn">📞 639 31 11 61</a></li>
   </ul>
-  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="page-hero">
@@ -115,7 +115,21 @@ footer{background:var(--steel);color:#fff;padding:3.5rem 2rem 1.5rem;border-top:
 </a>
 
 <script>
-document.querySelector('.hamburger').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open')});
+document.addEventListener('DOMContentLoaded',function(){
+  var btn = document.getElementById('hamburgerBtn');
+  var nav = document.getElementById('navLinks');
+  if(btn && nav){
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      nav.classList.toggle('open');
+    });
+    document.addEventListener('click',function(e){
+      if(!btn.contains(e.target) && !nav.contains(e.target)){
+        nav.classList.remove('open');
+      }
+    });
+  }
+});;
 
 const ARTICLES = [
   {slug:'cuanto-cuesta-reformar-bano-murcia-2026',cat:'Baños',titulo:'¿Cuánto cuesta reformar un baño en Murcia en 2026?',resumen:'Precios actualizados para reforma de baño en Murcia. Desde el cambio de bañera por ducha hasta una reforma completa con materiales de calidad.',img:'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80',fecha:'15 junio 2026'},
